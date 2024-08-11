@@ -1,0 +1,1 @@
+cat /etc/ssl/certs/ca-certificates.crt

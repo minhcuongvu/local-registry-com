@@ -1,0 +1,32 @@
+[req]
+default_bits       = 4096
+default_keyfile    = example.com.key
+distinguished_name = req_distinguished_name
+req_extensions     = req_ext
+x509_extensions    = v3_ca
+prompt             = no
+
+[req_distinguished_name]
+C  = US
+ST = YourState
+L  = YourCity
+O  = YourOrg
+OU = YourUnit
+CN = example.com
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1   = example.com
+IP.1    = 192.168.0.123
+IP.2    = 192.168.0.456
+IP.3    = 127.0.0.1
+
+[v3_ca]
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid:always,issuer
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names

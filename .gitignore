@@ -1,0 +1,5 @@
+*.pem
+*.crt
+*.key
+*.csr
+local.registry.com.cnf
