@@ -1,9 +1,9 @@
 #!/bin/bash
 
-WORKER_NAME="wslkindmultinodes-control-pane"
-WORKER_NAME="wslkindmultinodes-worker"
-WORKER_NAME="wslkindmultinodes-worker2"
-WORKER_NAME="wslkindmultinodes-worker3"
+WORKER_NAME="wslkindmultinodes-control-plane"
+# WORKER_NAME="wslkindmultinodes-worker"
+# WORKER_NAME="wslkindmultinodes-worker2"
+# WORKER_NAME="wslkindmultinodes-worker3"
 
 echo "Worker name set to: $WORKER_NAME"
 
@@ -21,7 +21,6 @@ fi
 docker cp rootCA.crt $DOCKER_CONTAINER_CURRENT:/usr/share/ca-certificates/
 
 docker exec -it $DOCKER_CONTAINER_CURRENT bash -c " \
-  echo hostname && \
   echo 'rootCA.crt' | tee -a /etc/ca-certificates.conf && \
   apt update -qq && \
   apt install -y mkcert nano && \
