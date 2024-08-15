@@ -18,7 +18,7 @@ if [ -z "$DOCKER_CONTAINER_CURRENT" ]; then
 fi
 
 # Copy the rootCA.crt to the container
-docker cp rootCA.crt $DOCKER_CONTAINER_CURRENT:/usr/share/ca-certificates/
+docker cp out/rootCA.crt $DOCKER_CONTAINER_CURRENT:/usr/share/ca-certificates/
 
 docker exec -it $DOCKER_CONTAINER_CURRENT bash -c " \
   echo 'rootCA.crt' | tee -a /etc/ca-certificates.conf && \

@@ -1,3 +1,4 @@
+out/
 *.pem
 *.crt
 *.key

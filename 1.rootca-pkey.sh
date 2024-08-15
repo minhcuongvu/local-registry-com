@@ -1,2 +1,2 @@
 # rootCA.key
-openssl genrsa -out rootCA.key 4096
+openssl genrsa -out out/rootCA.key 4096

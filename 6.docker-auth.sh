@@ -1,0 +1,1 @@
+docker run --rm --entrypoint htpasswd registry:2.7.0 -Bbn registry pwd > out/htpasswd

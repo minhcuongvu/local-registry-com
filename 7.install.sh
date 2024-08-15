@@ -1,5 +1,5 @@
 # Copy the rootCA.pem to the trusted certificates directory
-sudo cp rootCA.pem /usr/local/share/ca-certificates/rootCA.crt
+sudo cp out/rootCA.crt /usr/local/share/ca-certificates/rootCA.crt
 
 # Update the trusted certificates
 sudo update-ca-certificates

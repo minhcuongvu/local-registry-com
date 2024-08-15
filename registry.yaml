@@ -18,13 +18,23 @@ spec:
       - name: registry
         image: registry:2.7
         ports:
-        - containerPort: 5000
+        - containerPort: 443  # Changed from 5000 to 443
         volumeMounts:
         - name: registry-storage
           mountPath: /var/lib/registry
         - name: tls-certificates
           mountPath: /certs
+        - name: registry-auth
+          mountPath: /auth
         env:
+        - name: REGISTRY_AUTH
+          value: "htpasswd"
+        - name: REGISTRY_AUTH_HTPASSWD_REALM
+          value: "Registry Realm"
+        - name: REGISTRY_AUTH_HTPASSWD_PATH
+          value: "/auth/htpasswd"
+        - name: REGISTRY_HTTP_ADDR
+          value: "0.0.0.0:443"  # Keep this as is
         - name: REGISTRY_STORAGE_DELETE_ENABLED
           value: "true"
         - name: REGISTRY_HTTP_TLS_CERTIFICATE
@@ -37,6 +47,9 @@ spec:
       - name: tls-certificates
         secret:
           secretName: registry-tls
+      - name: registry-auth
+        secret:
+          secretName: registry-auth
 ---
 apiVersion: v1
 kind: Service
@@ -49,9 +62,9 @@ spec:
     app: registry
   ports:
     - protocol: TCP
-      port: 5000
-      targetPort: 5000
-      nodePort: 32555
+      port: 443         # Change this from 5000 to 443
+      targetPort: 443   # Change this from 5000 to 443
+      nodePort: 32555    # Keep your NodePort as is
   type: NodePort
   # type: LoadBalancer
   # loadBalancerIP: 192.168.0.123  # Set your desired IP here
